@@ -51,13 +51,13 @@ const Profile = () => {
                     {user.role === "admin" &&
                         <>
                             <button
-                                onClick={() => navigate("/add-hotel")}
+                                onClick={() => navigate("/add-event")}
                                 className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold mt-6 py-2 px-4 mr-2 rounded transition-all"
                             >
                                 Add New Event
                             </button>
                             <button
-                                onClick={() => navigate("/add-hotel")}
+                                onClick={() => navigate("/add-course")}
                                 className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold mt-6 py-2 px-4 mr-2 rounded transition-all"
                             >
                                 Add New Course

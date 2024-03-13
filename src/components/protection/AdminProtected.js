@@ -2,11 +2,11 @@ import { useSelector } from "react-redux"
 import { selectuser } from "../../features/user/userSlice"
 import { Navigate } from "react-router-dom"
 
-const Protected = ({ children }) => {
+const AdminProtected = ({ children }) => {
 
     const { user } = useSelector(selectuser)
 
-    if (!user.role) {
+    if (!user.role === "admin") {
         return <Navigate to="/" />
     }
 
@@ -17,4 +17,4 @@ const Protected = ({ children }) => {
     )
 }
 
-export default Protected
+export default AdminProtected
