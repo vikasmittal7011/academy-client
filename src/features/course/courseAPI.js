@@ -16,3 +16,14 @@ export const createCourse = async (course) => {
         }
     });
 }
+
+export const fetchAllCourses = async () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await axios.get(API + "course");
+            resolve({ data: response.data });
+        } catch (error) {
+            reject({ message: error.response.data.message });
+        }
+    });
+}

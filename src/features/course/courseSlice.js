@@ -1,16 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createCourse } from "./courseAPI";
+import { createCourse, fetchAllCourses } from "./courseAPI";
 
 const initialState = {
     status: "idle",
     message: null,
     courseAdd: false,
+    courses: []
 };
 
 export const createCourseAync = createAsyncThunk(
     "course/createCourse",
     async (course) => {
         const response = await createCourse(course);
+        return response;
+    }
+);
+
+export const fetchAllCoursesAync = createAsyncThunk(
+    "course/fetchAllCourses",
+    async () => {
+        const response = await fetchAllCourses();
         return response;
     }
 );
@@ -35,6 +44,17 @@ export const courseSlice = createSlice({
                 state.courseAdd = true;
             })
             .addCase(createCourseAync.rejected, (state, action) => {
+                state.status = "failed";
+                state.message = action.error.message;
+            })
+            .addCase(fetchAllCoursesAync.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(fetchAllCoursesAync.fulfilled, (state, action) => {
+                state.status = "idle";
+                state.courses = action.payload.data.courses;
+            })
+            .addCase(fetchAllCoursesAync.rejected, (state, action) => {
                 state.status = "failed";
                 state.message = action.error.message;
             })
