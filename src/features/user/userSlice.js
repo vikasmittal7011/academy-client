@@ -4,7 +4,7 @@ import { fetchUserData, logoutUser } from "./userAPI";
 const initialState = {
   status: "idle",
   userBookings: [],
-  user: {},
+  user: JSON.parse(localStorage.getItem("user")) || {},
   message: "",
 };
 

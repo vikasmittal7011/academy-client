@@ -6,7 +6,7 @@ const Protected = ({ children }) => {
 
     const { user } = useSelector(selectuser)
 
-    if (!user) {
+    if (!user.role) {
         return <Navigate to="/" />
     }
 

@@ -25,6 +25,7 @@ export const logoutUser = () => {
       const data = await response.json();
       if (data.success) {
         resolve({ data: data });
+        localStorage.removeItem("user")
       } else {
         reject({ message: data.message });
       }

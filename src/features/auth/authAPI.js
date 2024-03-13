@@ -26,6 +26,7 @@ export const registerUser = async (userData) => {
                 { withCredentials: true, }
             );
             resolve({ success: response.data.success });
+            localStorage.setItem("user", JSON.stringify(response.data.user))
         } catch (error) {
             reject({ message: error.response.data.message });
         }
@@ -41,6 +42,7 @@ export const loginUser = async (userData) => {
                 { withCredentials: true, }
             );
             resolve({ data: response.data });
+            localStorage.setItem("user", JSON.stringify(response.data.user))
         } catch (error) {
             reject({ message: error.response.data.message });
         }

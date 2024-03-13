@@ -19,7 +19,7 @@ const Header = () => {
     return (
         <div className="bg-blue-800 py-3 md:py-6">
             <Toast type={status === "failed" ? "err" : "success"} message={message === "Authentication Failed!!" || "User Not Found" ? "" : message} clearMessage={clearMessage} />
-            <div className="md:px-20 lg:px-40 p-4 tracking-wider text-white mx-auto flex justify-between">
+            <div className="md:px-20 p-4 tracking-wider text-white mx-auto flex justify-between">
                 <span className="font-bold text-2xl md:text-3xl cursor-pointer">
                     <Link to="/" className="outline-none">Vikey Holidays</Link>
                 </span>
