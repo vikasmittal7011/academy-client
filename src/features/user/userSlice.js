@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchUserData, logoutUser } from "./userAPI";
+import { fetchUserData, logoutUser, updateUserData } from "./userAPI";
 
 const initialState = {
   status: "idle",
   userBookings: [],
   user: JSON.parse(localStorage.getItem("user")) || {},
   message: "",
+  updateUser: false
 };
 
 export const fetchUserDataAsync = createAsyncThunk(
@@ -24,15 +25,24 @@ export const logoutUserAsync = createAsyncThunk(
   }
 );
 
+
+export const updateUserDataAsync = createAsyncThunk(
+  "user/updateUserData",
+  async (user) => {
+    const response = await updateUserData(user);
+    return response;
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     clearMessage: (state) => {
       state.message = null;
+      state.updateUser = false
     },
     userOut: (state) => {
-      state.userBookings = [];
       state.user = {};
     },
   },
@@ -58,6 +68,19 @@ export const userSlice = createSlice({
         state.message = action.payload.data.message;
       })
       .addCase(logoutUserAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.message = action.error.message;
+      })
+      .addCase(updateUserDataAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateUserDataAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.updateUser = true;
+        state.message = "Profile update successfully!!";
+        state.user = action.payload.data.user;
+      })
+      .addCase(updateUserDataAsync.rejected, (state, action) => {
         state.status = "failed";
         state.message = action.error.message;
       })

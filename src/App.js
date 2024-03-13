@@ -10,16 +10,15 @@ import Protected from "./components/common/Protected"
 
 const App = () => {
 
-  const { registerSuccess, loginSuccess, logoutSuccess, user } = useSelector(selectauth)
+  const { registerSuccess, loginSuccess, logoutSuccess } = useSelector(selectauth)
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!user) {
-      setTimeout(() => {
-        dispatch(fetchUserDataAsync());
-      }, 1000);
-    }
+    setTimeout(() => {
+      dispatch(fetchUserDataAsync());
+    }, 1000);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, loginSuccess, registerSuccess, logoutSuccess]);
 

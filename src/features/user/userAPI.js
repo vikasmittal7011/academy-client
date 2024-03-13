@@ -33,3 +33,18 @@ export const logoutUser = () => {
     }
   });
 }
+
+export const updateUserData = (user) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios.patch(API + "user",
+        { ...user },
+        { withCredentials: true, }
+      );
+      resolve({ data: response.data });
+      localStorage.setItem("user", JSON.stringify(response.data.user))
+    } catch (error) {
+      reject({ message: error.response.data.message });
+    }
+  });
+}

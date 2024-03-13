@@ -1,35 +1,44 @@
 import { FormProvider, useForm } from "react-hook-form"
 import { ClipLoader } from "react-spinners";
-import Details from "../event-form/Details";
+import Images from "../components/course-form/Images";
+import { useEffect, useState } from "react";
+import Detail from "../components/course-form/Detail";
+import Options from "../components/course-form/Otpions";
 import { useDispatch, useSelector } from "react-redux";
-import { clearMessage, createEventAync, selectevent } from "../../features/event/eventSlice";
-import Toast from "../common/Toast";
-import { useEffect } from "react";
+import { clearMessage, createCourseAync, selectcourse } from "../features/course/courseSlice";
+import Toast from "../components/common/Toast";
 import { useNavigate } from "react-router-dom";
 
-const AddEvent = () => {
-
+const AddCourse = () => {
 
     const navigate = useNavigate();
 
+    const { status, message, courseAdd } = useSelector(selectcourse)
+
     const dispatch = useDispatch();
 
-    const { status, message, eventAdd } = useSelector(selectevent)
+    const [error, setError] = useState("");
+
+    const [photos, setPhotos] = useState();
 
     const formMethod = useForm();
+    const { handleSubmit } = formMethod
 
-    const onSubmit = formMethod.handleSubmit((data) => {
-        dispatch(createEventAync({ ...data }))
+    const onSubmit = handleSubmit((data) => {
+        if (photos === "" || undefined) {
+            setError("Plase privide some images...")
+        }
+        dispatch(createCourseAync({ ...data, image: photos }))
     })
 
     useEffect(() => {
-        if (eventAdd) {
+        if (courseAdd) {
             setTimeout(() => {
                 navigate("/")
             }, 5000);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [eventAdd]);
+    }, [courseAdd]);
 
     return (
         <FormProvider {...formMethod}>
@@ -37,7 +46,11 @@ const AddEvent = () => {
 
             <form className="flex flex-col gap-5 w-full" onSubmit={onSubmit}>
 
-                <Details />
+                <Detail />
+
+                <Options />
+
+                <Images images={photos} setImages={setPhotos} error={error} setError={setError} />
 
                 <div className="flex flex-col md:flex-row justify-end md:items-center gap-5">
                     <button type="submit" className={`bg-blue-700 outline-none text-white p-2 px-4 rounded-md font-bold text-xl hover:bg-blue-500 transition-all ${status === "loading" ? "cursor-not-allowed" : "cursor-pointer"} flex justify-center items-center gap-2`}>
@@ -50,4 +63,4 @@ const AddEvent = () => {
     )
 }
 
-export default AddEvent
+export default AddCourse
