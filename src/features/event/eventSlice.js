@@ -1,16 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createEvent } from "./eventAPI";
+import { createEvent, fetchAllEvents } from "./eventAPI";
 
 const initialState = {
     status: "idle",
     message: null,
     eventAdd: false,
+    events: []
 };
 
 export const createEventAync = createAsyncThunk(
     "event/createEvent",
     async (event) => {
         const response = await createEvent(event);
+        return response;
+    }
+);
+
+export const fetchAllEventsAync = createAsyncThunk(
+    "event/fetchAllEvents",
+    async () => {
+        const response = await fetchAllEvents();
         return response;
     }
 );
@@ -35,6 +44,17 @@ export const eventSlice = createSlice({
                 state.eventAdd = true;
             })
             .addCase(createEventAync.rejected, (state, action) => {
+                state.status = "failed";
+                state.message = action.error.message;
+            })
+            .addCase(fetchAllEventsAync.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(fetchAllEventsAync.fulfilled, (state, action) => {
+                state.status = "idle";
+                state.events = action.payload.data.events;
+            })
+            .addCase(fetchAllEventsAync.rejected, (state, action) => {
                 state.status = "failed";
                 state.message = action.error.message;
             })

@@ -16,3 +16,14 @@ export const createEvent = (event) => {
         }
     });
 }
+
+export const fetchAllEvents = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await axios.get(API + "event");
+            resolve({ data: response.data });
+        } catch (error) {
+            reject({ message: error.response.data.message });
+        }
+    });
+}

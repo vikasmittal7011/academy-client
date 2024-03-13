@@ -35,12 +35,12 @@ const Details = () => {
                 Discription
                 <textarea
                     rows={5}
-                    {...register("discription", {
+                    {...register("description", {
                         required: "This field is require..."
                     })}
                     className={inputClass} />
-                {errors.discription &&
-                    <span className="text-red-500">{errors.discription.message}</span>
+                {errors.description &&
+                    <span className="text-red-500">{errors.description.message}</span>
                 }
             </label>
 
