@@ -1,18 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchUserData, logoutUser, updateUserData } from "./userAPI";
+import { fetchUserData, logoutUser, updateUserData, validateReferCode } from "./userAPI";
 
 const initialState = {
   status: "idle",
   userBookings: [],
   user: JSON.parse(localStorage.getItem("user")) || {},
   message: "",
-  updateUser: false
+  updateUser: false,
+  validReferCode: false,
 };
 
 export const fetchUserDataAsync = createAsyncThunk(
   "user/fetchUserData",
   async () => {
     const response = await fetchUserData();
+    return response;
+  }
+);
+
+export const validateReferCodeAsync = createAsyncThunk(
+  "user/validateReferCode",
+  async (referCode) => {
+    const response = await validateReferCode(referCode);
     return response;
   }
 );
@@ -24,7 +33,6 @@ export const logoutUserAsync = createAsyncThunk(
     return response;
   }
 );
-
 
 export const updateUserDataAsync = createAsyncThunk(
   "user/updateUserData",
@@ -40,7 +48,8 @@ export const userSlice = createSlice({
   reducers: {
     clearMessage: (state) => {
       state.message = null;
-      state.updateUser = false
+      state.updateUser = false;
+      state.validReferCode = false;
     },
     userOut: (state) => {
       state.user = {};
@@ -81,6 +90,18 @@ export const userSlice = createSlice({
         state.user = action.payload.data.user;
       })
       .addCase(updateUserDataAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.message = action.error.message;
+      })
+      .addCase(validateReferCodeAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(validateReferCodeAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.validReferCode = true;
+        state.message = "Refer Code is valid";
+      })
+      .addCase(validateReferCodeAsync.rejected, (state, action) => {
         state.status = "failed";
         state.message = action.error.message;
       })

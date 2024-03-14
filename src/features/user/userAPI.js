@@ -48,3 +48,21 @@ export const updateUserData = (user) => {
     }
   });
 }
+
+export const validateReferCode = (referCode) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch(API + "user/validate/refer/code", {
+        method: "GET",
+        credentials: "include"
+      })
+      const data = await response.json();
+      if (data.success) {
+        resolve({ data: data });
+      } else {
+        reject({ message: data.message });
+      }
+    } catch (error) {
+    }
+  });
+}

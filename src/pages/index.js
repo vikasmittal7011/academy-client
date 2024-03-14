@@ -10,5 +10,8 @@ const CourseDetail = lazy(() => import("./CourseDetail"))
 const EventDetail = lazy(() => import("./EventDetail"))
 const EditCourse = lazy(() => import("./EditCourse"))
 const EditEvent = lazy(() => import("./EditEvent"))
+const EventEnroll = lazy(() => import("./EventEnroll"))
+const BookingConfirm = lazy(() => import("./BookingConfirm"))
+const BookingFailer = lazy(() => import("./BookingFailer"))
 
-export { Home, Register, Login, Profile, AddCourse, AddEvent, CourseDetail, EditCourse, EventDetail, EditEvent }
+export { Home, Register, Login, Profile, AddCourse, AddEvent, CourseDetail, EditCourse, EventDetail, EditEvent, EventEnroll, BookingConfirm, BookingFailer }

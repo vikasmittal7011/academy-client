@@ -18,11 +18,11 @@ const Events = ({ events }) => {
                         </p>
 
                         <p className="font-bold my-2">Invited Motivator:
-                            <div className="grid grid-cols-3 gap-2 mt-2">
+                            <span className="grid grid-cols-3 gap-2 mt-2">
                                 {event?.speakers?.map((speaker, i) => (
-                                    <span ksy={i} className="bg-gray-400 ms-1 p-1 rounded-sm font-semibold">{speaker.name}</span>
+                                    <span key={i} className="bg-gray-400 ms-1 p-1 rounded-sm font-semibold">{speaker.name}</span>
                                 ))}
-                            </div>
+                            </span>
                         </p>
 
                         <p className="line-clamp-4 font-semibold my-2">{event.description}</p>
