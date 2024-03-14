@@ -31,7 +31,7 @@ const App = () => {
           <Route exact path="/login/:token?" element={<Layout><Login /></Layout>} />
           <Route exact path="/register" element={<Layout><Register /></Layout>} />
           <Route exact path="/my-profile" element={<BasicProtected><Layout><Profile /></Layout></BasicProtected>} />
-          <Route exact path="/course/:id?" element={<BasicProtected><Layout><CourseDetail /></Layout></BasicProtected>} />
+          <Route exact path="/course/:id?" element={<Layout><CourseDetail /></Layout>} />
           <Route exact path="/add-course" element={<AdminProtected><Layout><AddCourse /></Layout></AdminProtected>} />
           <Route exact path="/add-event" element={<AdminProtected><Layout><AddEvent /></Layout></AdminProtected>} />
         </Routes>

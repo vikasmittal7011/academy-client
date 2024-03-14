@@ -38,3 +38,14 @@ export const fetchCourseById = async (id) => {
         }
     });
 }
+
+export const deteleCourse = async (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await axios.delete(API + "course/" + id, { withCredentials: true });
+            resolve({ data: response.data });
+        } catch (error) {
+            reject({ message: error.response.data.message });
+        }
+    });
+}

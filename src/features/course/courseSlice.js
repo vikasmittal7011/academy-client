@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createCourse, fetchAllCourses, fetchCourseById } from "./courseAPI";
+import { createCourse, deteleCourse, fetchAllCourses, fetchCourseById } from "./courseAPI";
 
 const initialState = {
     status: "idle",
     message: null,
     courseAdd: false,
     courses: [],
-    course: {}
+    course: {},
+    deteleCourse: false,
 };
 
 export const createCourseAync = createAsyncThunk(
@@ -33,6 +34,14 @@ export const fetchCourseByIdAync = createAsyncThunk(
     }
 );
 
+export const deteleCourseAync = createAsyncThunk(
+    "course/deteleCourse",
+    async (id) => {
+        const response = await deteleCourse(id);
+        return response;
+    }
+);
+
 export const courseSlice = createSlice({
     name: "course",
     initialState,
@@ -40,6 +49,7 @@ export const courseSlice = createSlice({
         clearMessage: (state) => {
             state.message = null;
             state.courseAdd = false;
+            state.deteleCourse = false;
         },
     },
     extraReducers: (builder) => {
@@ -75,6 +85,18 @@ export const courseSlice = createSlice({
                 state.course = action.payload.data.course;
             })
             .addCase(fetchCourseByIdAync.rejected, (state, action) => {
+                state.status = "failed";
+                state.message = action.error.message;
+            })
+            .addCase(deteleCourseAync.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(deteleCourseAync.fulfilled, (state) => {
+                state.status = "idle";
+                state.deteleCourse = true;
+                state.message = "Delete Success";
+            })
+            .addCase(deteleCourseAync.rejected, (state, action) => {
                 state.status = "failed";
                 state.message = action.error.message;
             })

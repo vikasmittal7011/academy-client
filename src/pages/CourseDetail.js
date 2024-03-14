@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom"
-import { fetchCourseByIdAync, selectcourse } from "../features/course/courseSlice";
+import { Link, useNavigate, useParams } from "react-router-dom"
+import { clearMessage, fetchCourseByIdAync, selectcourse } from "../features/course/courseSlice";
 import SimpleLoading from "../components/common/SimpleLoading";
 import { selectuser } from "../features/user/userSlice";
+import DeleteNotic from "../components/course/DeleteNotic";
+import Toast from "../components/common/Toast";
 
 const CourseDetail = () => {
 
+    const navigate = useNavigate();
+
     const [urlCopy, setUrlCopy] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleIsOpen = () => {
+        setIsOpen(!isOpen)
+    }
 
     const { user } = useSelector(selectuser)
 
-    const { status, course } = useSelector(selectcourse)
+    const { status, course, deteleCourse, message } = useSelector(selectcourse)
 
     const dispatch = useDispatch();
 
@@ -31,8 +40,19 @@ const CourseDetail = () => {
         }, 2000);
     }
 
+    useEffect(() => {
+        if (deteleCourse) {
+            setTimeout(() => {
+                navigate("/")
+            }, 3000);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [deteleCourse]);
+
     return (
         <>
+            <Toast message={message} type={status === "failed" ? "err" : "success"} clearMessage={clearMessage} />
+            <DeleteNotic isOpen={isOpen} handleIsOpen={handleIsOpen} id={course.id} />
             {status === "loading" ?
                 <SimpleLoading />
                 :
@@ -57,7 +77,7 @@ const CourseDetail = () => {
 
                             <Link className="bg-green-600 text-center rounded-md text-lg px-4 py-2 outline-none transition-all text-white hover:bg-green-500">Register</Link>
 
-                            {user.role === "admin" && <button className="bg-red-500 text-center rounded-md text-lg px-4 py-2 outline-none transition-all text-white hover:bg-red-700">Delete</button>}
+                            {user.role === "admin" && <button onClick={handleIsOpen} className="bg-red-500 text-center rounded-md text-lg px-4 py-2 outline-none transition-all text-white hover:bg-red-700">Delete</button>}
 
                             <button onClick={handleRefer} className="bg-violet-500 text-center rounded-md text-lg px-4 py-2 outline-none transition-all text-white hover:bg-violet-700">{urlCopy ? "Copyed" : "Refer"}</button>
                         </div>
