@@ -27,3 +27,14 @@ export const fetchAllCourses = async () => {
         }
     });
 }
+
+export const fetchCourseById = async (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await axios.get(API + "course/" + id);
+            resolve({ data: response.data });
+        } catch (error) {
+            reject({ message: error.response.data.message });
+        }
+    });
+}
