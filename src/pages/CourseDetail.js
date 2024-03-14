@@ -64,7 +64,7 @@ const CourseDetail = () => {
                                 <p>Course Type: {course.programmeType}</p>
                                 <p>Learning Mode : {course.mode}</p>
                                 <p>Learning Eligibility : {course.eligibility}</p>
-                                <p>Duaration : {course.duration / 12} Year, {course.duration % 12} Months</p>
+                                <p>Duaration : {Math.round(course.duration / 12)} Year, {course.duration % 12} Months</p>
                                 <p>Fees : {course.fees}</p>
                             </div>
                             <div>
@@ -73,7 +73,7 @@ const CourseDetail = () => {
                         </div>
 
                         <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-5">
-                            {user.role === "admin" && <Link className="bg-blue-500 text-center rounded-md text-lg px-4 py-2 outline-none transition-all text-white hover:bg-blue-700">Edit</Link>}
+                            {user.role === "admin" && <Link to={`/edit-course/${course.id}`} className="bg-blue-500 text-center rounded-md text-lg px-4 py-2 outline-none transition-all text-white hover:bg-blue-700">Edit</Link>}
 
                             <Link className="bg-green-600 text-center rounded-md text-lg px-4 py-2 outline-none transition-all text-white hover:bg-green-500">Register</Link>
 

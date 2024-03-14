@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Layout from "./components/common/Layout"
-import { AddCourse, AddEvent, CourseDetail, Home, Login, Profile, Register } from "./pages"
+import { AddCourse, AddEvent, CourseDetail, EditCourse, Home, Login, Profile, Register } from "./pages"
 import { Suspense, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchUserDataAsync } from "./features/user/userSlice"
@@ -33,6 +33,7 @@ const App = () => {
           <Route exact path="/my-profile" element={<BasicProtected><Layout><Profile /></Layout></BasicProtected>} />
           <Route exact path="/course/:id?" element={<Layout><CourseDetail /></Layout>} />
           <Route exact path="/add-course" element={<AdminProtected><Layout><AddCourse /></Layout></AdminProtected>} />
+          <Route exact path="/edit-course/:id?" element={<AdminProtected><Layout><EditCourse /></Layout></AdminProtected>} />
           <Route exact path="/add-event" element={<AdminProtected><Layout><AddEvent /></Layout></AdminProtected>} />
         </Routes>
       </Suspense>

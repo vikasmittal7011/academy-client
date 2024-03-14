@@ -49,3 +49,17 @@ export const deteleCourse = async (id) => {
         }
     });
 }
+
+export const updateCourse = async (course) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await axios.put(API + "course/" + course.id,
+                { ...course },
+                { withCredentials: true }
+            );
+            resolve({ data: response.data });
+        } catch (error) {
+            reject({ message: error.response.data.message });
+        }
+    });
+}

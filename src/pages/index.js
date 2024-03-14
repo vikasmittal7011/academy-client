@@ -7,5 +7,6 @@ const Profile = lazy(() => import("./Profile"))
 const AddCourse = lazy(() => import("./AddCourse"))
 const AddEvent = lazy(() => import("./AddEvent"))
 const CourseDetail = lazy(() => import("./CourseDetail"))
+const EditCourse = lazy(() => import("./EditCourse"))
 
-export { Home, Register, Login, Profile, AddCourse, AddEvent, CourseDetail }
+export { Home, Register, Login, Profile, AddCourse, AddEvent, CourseDetail, EditCourse }
