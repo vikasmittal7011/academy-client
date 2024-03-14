@@ -27,3 +27,39 @@ export const fetchAllEvents = () => {
         }
     });
 }
+
+export const fetchEventById = async (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await axios.get(API + "event/" + id);
+            resolve({ data: response.data });
+        } catch (error) {
+            reject({ message: error.response.data.message });
+        }
+    });
+}
+
+export const updateEvent = async (event) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await axios.put(API + "event/" + event.id,
+                { ...event },
+                { withCredentials: true }
+            );
+            resolve({ data: response.data });
+        } catch (error) {
+            reject({ message: error.response.data.message });
+        }
+    });
+}
+
+export const deteleEvent = async (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await axios.delete(API + "event/" + id, { withCredentials: true });
+            resolve({ data: response.data });
+        } catch (error) {
+            reject({ message: error.response.data.message });
+        }
+    });
+}
