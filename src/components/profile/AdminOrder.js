@@ -3,10 +3,16 @@ import { fetchAlleventEnrollsAync, selecteventrnroll } from "../../features/even
 import SimpletLoading from "../common/SimpleLoading";
 import { useEffect, useState } from "react";
 import Events from "../admin-orders/Events";
+import Course from "../admin-orders/Course";
+import { fetchAllCourseEnrollsAync } from "../../features/course-enroll/courseEnrollSlice";
 
 const AdminOrder = () => {
 
     const [selectedFetching, setSelectedFetching] = useState("all");
+
+
+    const [courseSelectedFetching, setCourseSelectedFetching] = useState("all");
+
 
     const { status } = useSelector(selecteventrnroll);
 
@@ -17,6 +23,11 @@ const AdminOrder = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedFetching]);
 
+    useEffect(() => {
+        dispatch(fetchAllCourseEnrollsAync(courseSelectedFetching))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [courseSelectedFetching]);
+
     return (
         <>
             {status === "loading" ?
@@ -24,6 +35,7 @@ const AdminOrder = () => {
                 :
                 <>
                     <Events selectedFetching={selectedFetching} setSelectedFetching={setSelectedFetching} />
+                    <Course selectedFetching={courseSelectedFetching} setSelectedFetching={setCourseSelectedFetching} />
                 </>
             }
         </>

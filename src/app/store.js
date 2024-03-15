@@ -6,6 +6,7 @@ import courseReducer from "../features/course/courseSlice";
 import eventReducer from "../features/event/eventSlice";
 import razorReducer from "../features/razor/razorSlice";
 import eventEnrollReducer from "../features/event-enroll/eventEnrollSlice";
+import courseEnrollReducer from "../features/course-enroll/courseEnrollSlice";
 
 export const store = configureStore({
     reducer: {
@@ -15,5 +16,6 @@ export const store = configureStore({
         event: eventReducer,
         razor: razorReducer,
         eventEnroll: eventEnrollReducer,
+        courseEnroll: courseEnrollReducer,
     },
 });
