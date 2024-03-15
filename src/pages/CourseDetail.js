@@ -75,7 +75,7 @@ const CourseDetail = () => {
                         <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-5">
                             {user.role === "admin" && <Link to={`/edit-course/${course.id}`} className="bg-blue-500 text-center rounded-md text-lg px-4 py-2 outline-none transition-all text-white hover:bg-blue-700">Edit</Link>}
 
-                            <Link className="bg-green-600 text-center rounded-md text-lg px-4 py-2 outline-none transition-all text-white hover:bg-green-500">Register</Link>
+                            <Link to={`/course/register/${course.id}`} className="bg-green-600 text-center rounded-md text-lg px-4 py-2 outline-none transition-all text-white hover:bg-green-500">Register</Link>
 
                             {user.role === "admin" && <button onClick={handleIsOpen} className="bg-red-500 text-center rounded-md text-lg px-4 py-2 outline-none transition-all text-white hover:bg-red-700">Delete</button>}
 
