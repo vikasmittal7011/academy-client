@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import { inputClass, labelClass } from "../../constant/index";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { paymentIntentAync, selectrazor } from "../../features/razor/razorSlice";
 import { validateReferCodeAsync } from "../../features/user/userSlice";
 import payment from "../../utils/payment";
 
 const Form = ({ referCode, event, user, validReferCode }) => {
+
+    const [amount, setAmount] = useState();
 
     const { data } = useSelector(selectrazor);
 
@@ -28,7 +30,7 @@ const Form = ({ referCode, event, user, validReferCode }) => {
 
     useEffect(() => {
         if (data.success) {
-            const callback_url = `${process.env.REACT_APP_URL}event/enroll?eventId=${event.id}&totalPrice=${getTotalAmount()}&referCode=${referCode || ""}&numberOfSeat=${watch("numberOfSeat")}`
+            const callback_url = `${process.env.REACT_APP_URL}event/enroll?eventId=${event.id}&totalPrice=${amount}&referCode=${referCode || ""}&numberOfSeat=${watch("numberOfSeat")}`
             const { key } = data;
             payment(callback_url, key, data, user, event)
         }
@@ -37,7 +39,7 @@ const Form = ({ referCode, event, user, validReferCode }) => {
 
 
     const handleOnlinePayment = async () => {
-        dispatch(paymentIntentAync({ totalAmount: getTotalAmount() }))
+        dispatch(paymentIntentAync({ totalAmount: amount }))
     }
 
     useEffect(() => {
@@ -51,15 +53,18 @@ const Form = ({ referCode, event, user, validReferCode }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        getTotalAmount()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [validReferCode]);
 
     const getTotalAmount = () => {
-        let amount = event.fees * +watch("numberOfSeat")
-        if (referCode && validReferCode) {
-            amount = Math.round(
-                (event?.fees * watch("numberOfSeat")) * (1 - 10 / 100)
-            )
+        console.log(watchReferCode, validReferCode)
+        let amount = event.fees;
+        if (watchReferCode && validReferCode) {
+            amount = Math.round(event?.fees * (1 - 10 / 100))
         }
-        return amount;
+        setAmount(amount)
     }
 
     return (
@@ -72,11 +77,11 @@ const Form = ({ referCode, event, user, validReferCode }) => {
 
             <label className={labelClass}>
                 Refer Code
-                <input {...register("referCode")} className={inputClass} />
+                <input {...register("referCode")} className={`${inputClass} ${watchReferCode && validReferCode && "border-green-500 oultine-green-500"}`}  />
             </label>
             <p onClick={varifyReferCode} className="underline my-1 cursor-pointer">Verify</p>
 
-            <p>Total Price {getTotalAmount()}</p>
+            <p>Total Price {amount}</p>
 
             <button className="bg-blue-500 hover:bg-blue-700 text-white transition outline-none w-full py-2 px-4 textlg mt-5 rounded-md">Enroll Me</button>
 
