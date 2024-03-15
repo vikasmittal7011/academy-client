@@ -48,12 +48,11 @@ const Details = () => {
                 <div className="flex flex-col">
                     <label className={labelClass}>Start Date</label>
                     <Controller
-                        {...register("startDate", { required: 'This field is require...' })}
+                        {...register("endDate", { required: 'This field is required...' })}
                         control={control}
                         render={({ field }) => (
                             <DatePicker
-                                startDate={new Date()}
-                                selected={field.value}
+                                selected={field.value instanceof Date ? field.value : null}
                                 onChange={date => field.onChange(date)}
                                 showTimeSelect
                                 timeFormat="HH:mm"
@@ -62,7 +61,7 @@ const Details = () => {
                                 dateFormat="MMMM d, yyyy h:mm aa"
                                 className={inputClass}
                                 wrapperClassName="min-w-full"
-                                placeholderText="Start Date"
+                                placeholderText="End Date"
                             />
                         )}
                     />
@@ -74,12 +73,11 @@ const Details = () => {
                 <div className="flex flex-col">
                     <label className={labelClass}>End Date</label>
                     <Controller
-                        {...register("endDate", { required: 'This field is require...' })}
+                        {...register("endDate", { required: 'This field is required...' })}
                         control={control}
                         render={({ field }) => (
                             <DatePicker
-                                startDate={new Date()}
-                                selected={field.value}
+                                selected={field.value instanceof Date ? field.value : null}
                                 onChange={date => field.onChange(date)}
                                 showTimeSelect
                                 timeFormat="HH:mm"

@@ -50,7 +50,6 @@ export const updateUserData = (user) => {
 }
 
 export const validateReferCode = (referCode) => {
-  console.log(referCode)
   return new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(API + "user/validate/refer/code?referCode=" + referCode.referCode, {

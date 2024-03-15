@@ -59,7 +59,6 @@ const Form = ({ referCode, event, user, validReferCode }) => {
     }, [validReferCode]);
 
     const getTotalAmount = () => {
-        console.log(watchReferCode, validReferCode)
         let amount = event.fees;
         if (watchReferCode && validReferCode) {
             amount = Math.round(event?.fees * (1 - 10 / 100))

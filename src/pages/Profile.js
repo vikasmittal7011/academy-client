@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import ProfileUpdateForm from "../components/profile/ProfileUpdateForm";
 import { useState } from "react";
 import Toast from "../components/common/Toast";
+import AdminOrder from "../components/profile/AdminOrder";
 
 const Profile = () => {
 
@@ -67,6 +68,9 @@ const Profile = () => {
                 </div>
             )
             }
+
+            {user.role === "admin" && <AdminOrder />}
+
         </div >
     )
 }

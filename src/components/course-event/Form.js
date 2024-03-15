@@ -59,7 +59,6 @@ const Form = ({ referCode, course, user, validReferCode }) => {
     }, [validReferCode]);
 
     const getTotalAmount = () => {
-        console.log(watchReferCode, validReferCode)
         let amount = course.fees;
         if (watchReferCode && validReferCode) {
             amount = Math.round(course?.fees * (1 - 10 / 100))
@@ -72,7 +71,7 @@ const Form = ({ referCode, course, user, validReferCode }) => {
 
             <label className={labelClass}>
                 Refer Code
-                <input {...register("referCode")} className={`${inputClass} ${watchReferCode && validReferCode && "border-green-500 oultine-green-500"}`}  />
+                <input {...register("referCode")} className={`${inputClass} ${watchReferCode && validReferCode && "border-green-500 oultine-green-500"}`} />
             </label>
             <p onClick={varifyReferCode} className="underline my-1 cursor-pointer">Verify</p>
 
