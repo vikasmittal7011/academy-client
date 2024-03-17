@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchAlleventEnrollsAync, selecteventrnroll } from "../../features/event-enroll/eventEnrollSlice"
 import SimpletLoading from "../common/SimpleLoading";
 import { useEffect, useState } from "react";
-import Events from "../admin-orders/Events";
-import Course from "../admin-orders/Course";
+import Events from "../orders/Events";
+import Course from "../orders/Course";
 import { fetchAllCourseEnrollsAync } from "../../features/course-enroll/courseEnrollSlice";
 
 const AdminOrder = () => {

@@ -2,12 +2,13 @@ import { useSelector } from "react-redux"
 import TimeSection from "./TimeSection";
 import UserDetails from "./UserDetails";
 import { selectcoursernroll } from "../../features/course-enroll/courseEnrollSlice";
+import { selectuser } from "../../features/user/userSlice";
 
 const Course = ({ selectedFetching, setSelectedFetching }) => {
 
-    const { courseEnrolls } = useSelector(selectcoursernroll);
+    const { user } = useSelector(selectuser)
 
-    console.log(courseEnrolls)
+    const { courseEnrolls } = useSelector(selectcoursernroll);
 
     return (
         <>
@@ -15,7 +16,7 @@ const Course = ({ selectedFetching, setSelectedFetching }) => {
                 <div>
                     <div className="mx-auto max-w-7xl">
 
-                        <TimeSection heading="Course" setSelectedFetching={setSelectedFetching} selectedFetching={selectedFetching} />
+                        <TimeSection heading="Courses" setSelectedFetching={setSelectedFetching} selectedFetching={selectedFetching} user={user} />
 
                         {courseEnrolls?.map((c, i) => (
                             <div key={i} className="border border-slate-400 rounded-md p-4 my-5">
@@ -29,7 +30,7 @@ const Course = ({ selectedFetching, setSelectedFetching }) => {
                                         <p>Fees : {c.courseId.fees}</p>
                                     </div>
 
-                                    <UserDetails e={c} />
+                                    <UserDetails e={c} user={user} />
 
                                 </div>
                             </div>
