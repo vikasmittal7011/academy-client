@@ -2,11 +2,18 @@ import { useSelector } from "react-redux"
 import { clearMessage, selectuser } from "../features/user/userSlice"
 import { useNavigate } from "react-router-dom"
 import ProfileUpdateForm from "../components/profile/ProfileUpdateForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Toast from "../components/common/Toast";
 import AdminOrder from "../components/profile/Orders";
+import { selectcoursernroll } from "../features/course-enroll/courseEnrollSlice";
+import { selecteventrnroll } from "../features/event-enroll/eventEnrollSlice";
 
 const Profile = () => {
+
+    const [totalPurchase, setTotalPurchase] = useState();
+
+    const { courseEnrolls } = useSelector(selectcoursernroll)
+    const { eventEnrolls } = useSelector(selecteventrnroll)
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -17,6 +24,11 @@ const Profile = () => {
     const navigate = useNavigate();
 
     const { user, status, message } = useSelector(selectuser);
+
+    useEffect(() => {
+        const a = [...courseEnrolls?.filter((e) => e.referCode === e.user.referCode), ...eventEnrolls?.filter((e) => e.referCode === e.user.referCode)]
+        setTotalPurchase(a.length)
+    }, [courseEnrolls, eventEnrolls]);
 
     return (
         <div>
@@ -48,6 +60,9 @@ const Profile = () => {
                     }
                     <h2 className="font-bold text-xl mb-1 text-yellow-400">
                         My Refer Code: {user?.referCode}
+                    </h2>
+                    <h2 className="font-bold text-xl mb-1 text-black-400">
+                        Purchased By My Refer Code: {totalPurchase}
                     </h2>
                     {user.role === "admin" &&
                         <>

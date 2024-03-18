@@ -56,12 +56,12 @@ const Form = ({ referCode, event, user, validReferCode }) => {
     useEffect(() => {
         getTotalAmount()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [validReferCode]);
+    }, [validReferCode, watch("numberOfSeat")]);
 
     const getTotalAmount = () => {
-        let amount = event.fees;
+        let amount = event.fees * watch("numberOfSeat");
         if (watchReferCode && validReferCode) {
-            amount = Math.round(event?.fees * (1 - 10 / 100))
+            amount = Math.round(event?.fees * (1 - 10 / 100)) *  watch("numberOfSeat")
         }
         setAmount(amount)
     }
@@ -70,13 +70,13 @@ const Form = ({ referCode, event, user, validReferCode }) => {
         <form onSubmit={onSubmit} className="flex flex-col">
             <label className={labelClass}>
                 Number Of Seat
-                <input value={1} type="number" min={1} max={10} {...register("numberOfSeat", { required: "This fiels is require..." })} className={inputClass} />
+                <input type="number" min={1} max={10} {...register("numberOfSeat", { required: "This fiels is require..." })} className={inputClass} />
                 {errors.numberOfSeat && <span className="text-red-500">{errors.numberOfSeat.message}</span>}
             </label>
 
             <label className={labelClass}>
                 Refer Code
-                <input {...register("referCode")} className={`${inputClass} ${watchReferCode && validReferCode && "border-green-500 oultine-green-500"}`}  />
+                <input {...register("referCode")} className={`${inputClass} ${watchReferCode && validReferCode && "border-green-500 oultine-green-500"}`} />
             </label>
             <p onClick={varifyReferCode} className="underline my-1 cursor-pointer">Verify</p>
 

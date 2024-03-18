@@ -49,6 +49,7 @@ export const userSlice = createSlice({
     clearMessage: (state) => {
       state.message = null;
       state.updateUser = false;
+      state.validReferCode = false;
     },
     userOut: (state) => {
       state.user = {};
