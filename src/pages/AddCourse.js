@@ -1,13 +1,14 @@
-import { FormProvider, useForm } from "react-hook-form"
 import { ClipLoader } from "react-spinners";
-import Images from "../components/course-form/Images";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { FormProvider, useForm } from "react-hook-form"
+
+import Toast from "../components/common/Toast";
+import Images from "../components/course-form/Images";
 import Detail from "../components/course-form/Detail";
 import Options from "../components/course-form/Otpions";
-import { useDispatch, useSelector } from "react-redux";
 import { clearMessage, createCourseAync, selectcourse } from "../features/course/courseSlice";
-import Toast from "../components/common/Toast";
-import { useNavigate } from "react-router-dom";
 
 const AddCourse = () => {
 
@@ -22,7 +23,7 @@ const AddCourse = () => {
     const [photos, setPhotos] = useState();
 
     const formMethod = useForm();
-    const { handleSubmit } = formMethod
+    const { handleSubmit } = formMethod;
 
     const onSubmit = handleSubmit((data) => {
         if (photos === "" || undefined) {

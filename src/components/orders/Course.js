@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux"
-import TimeSection from "./TimeSection";
+
 import UserDetails from "./UserDetails";
-import { selectcoursernroll } from "../../features/course-enroll/courseEnrollSlice";
-import { selectuser } from "../../features/user/userSlice";
+import TimeSection from "./TimeSection";
 import Details from "../course/Details";
+import { selectuser } from "../../features/user/userSlice";
+import { selectcoursernroll } from "../../features/course-enroll/courseEnrollSlice";
 
 const Course = ({ selectedFetching, setSelectedFetching }) => {
 
@@ -17,7 +18,6 @@ const Course = ({ selectedFetching, setSelectedFetching }) => {
             {courseEnrolls?.length > 0 ?
                 <div>
                     <div className="mx-auto max-w-7xl">
-
 
                         {user.role === "admin" && courseEnrolls?.map((c, i) => (
                             <div key={i} className="border border-slate-400 rounded-md p-4 my-5">

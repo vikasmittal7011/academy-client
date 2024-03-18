@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form"
-import { useDispatch, useSelector } from "react-redux"
-import { registerUserAync, retypeData, selectauth } from "../../features/auth/authSlice"
 import { ClipLoader } from "react-spinners"
+import { useDispatch, useSelector } from "react-redux"
+
 import { inputClass, labelClass, scrollToTop } from "../../constant"
+import { registerUserAync, retypeData, selectauth } from "../../features/auth/authSlice"
 
 const OTPForm = () => {
-
 
     const { userData, status } = useSelector(selectauth);
 
@@ -25,8 +25,6 @@ const OTPForm = () => {
     const onSubmit = handleSubmit(async (data) => {
         dispatch(registerUserAync({ ...userData, ...data }));
     })
-
-
 
     return (
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>

@@ -1,21 +1,21 @@
-import { FormProvider, useForm } from "react-hook-form"
-import { ClipLoader } from "react-spinners";
-import Images from "../components/course-form/Images";
 import { useEffect, useState } from "react";
-import Detail from "../components/course-form/Detail";
-import Options from "../components/course-form/Otpions";
+import { ClipLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
-import { clearMessage, fetchCourseByIdAync, selectcourse, updateCourseAync } from "../features/course/courseSlice";
-import Toast from "../components/common/Toast";
+import { FormProvider, useForm } from "react-hook-form"
 import { useNavigate, useParams } from "react-router-dom";
 
+import Toast from "../components/common/Toast";
+import Detail from "../components/course-form/Detail";
+import Images from "../components/course-form/Images";
+import Options from "../components/course-form/Otpions";
+import { clearMessage, fetchCourseByIdAync, selectcourse, updateCourseAync } from "../features/course/courseSlice";
+
 const EditCourse = () => {
+    const { status, message, course, updateCourse } = useSelector(selectcourse)
 
     const { id } = useParams();
 
     const navigate = useNavigate();
-
-    const { status, message, course, updateCourse } = useSelector(selectcourse)
 
     const dispatch = useDispatch();
 

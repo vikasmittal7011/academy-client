@@ -1,7 +1,8 @@
+import { useEffect } from "react";
 import { useFormContext, useFieldArray } from "react-hook-form";
+
 import Heading from "../common/Heading";
 import { inputClass, labelClass } from "../../constant";
-import { useEffect } from "react";
 
 const Speakers = () => {
 

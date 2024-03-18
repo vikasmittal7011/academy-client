@@ -1,13 +1,16 @@
-import { useFormContext } from "react-hook-form"
-import { inputClass } from "../../constant"
-import Heading from "../common/Heading"
-import { ArrowUpTrayIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useRef } from "react";
+import { useFormContext } from "react-hook-form"
+import { ArrowUpTrayIcon, TrashIcon } from "@heroicons/react/24/outline";
+
+import Heading from "../common/Heading"
+import { inputClass } from "../../constant"
 
 
 const Images = ({ images, setImages, error, setError }) => {
 
     const imgClickRef = useRef()
+
+    const { register, setValue, watch } = useFormContext();
 
     const handleRefClick = () => {
         imgClickRef.current.click();
@@ -31,9 +34,6 @@ const Images = ({ images, setImages, error, setError }) => {
             }
         });
     };
-
-
-    const { register, setValue, watch } = useFormContext();
 
     const handleClick = async () => {
         setError("")

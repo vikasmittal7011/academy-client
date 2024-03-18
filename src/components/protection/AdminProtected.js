@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
-import { selectuser } from "../../features/user/userSlice"
 import { Navigate } from "react-router-dom"
+
+import { selectuser } from "../../features/user/userSlice"
 
 const AdminProtected = ({ children }) => {
 

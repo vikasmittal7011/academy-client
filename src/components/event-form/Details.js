@@ -1,10 +1,12 @@
-import { Controller, useFormContext } from "react-hook-form"
-import { inputClass, labelClass } from "../../constant"
-import Heading from "../common/Heading";
 import DatePicker from "react-datepicker"
+import { Controller, useFormContext } from "react-hook-form"
+
 import 'react-datepicker/dist/react-datepicker.css';
+
 import Speakers from "./Speaker";
 import Location from "./Location";
+import Heading from "../common/Heading";
+import { inputClass, labelClass } from "../../constant"
 
 const Details = () => {
 

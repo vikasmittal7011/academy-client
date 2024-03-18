@@ -1,10 +1,10 @@
 import { useFormContext } from "react-hook-form"
+
 import { labelClass } from "../../constant";
 
 const Otpions = () => {
 
     const { register, formState: { errors }, watch } = useFormContext();
-
     const typeWatch = watch("mode")
     const typeProgrammeType = watch("programmeType")
 

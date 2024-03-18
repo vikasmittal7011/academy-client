@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
-import { fetchEventByIdAync, selectevent } from "../features/event/eventSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import Toast from "../components/common/Toast";
-import { clearMessage, selectuser } from "../features/user/userSlice";
+import Details from "../components/event/Details";
 import Form from "../components/enroll-event/Form";
 import SimpleLoading from "../components/common/SimpleLoading";
-import Details from "../components/event/Details";
+import { clearMessage, selectuser } from "../features/user/userSlice";
+import { fetchEventByIdAync, selectevent } from "../features/event/eventSlice";
 
 const EventEnroll = () => {
 

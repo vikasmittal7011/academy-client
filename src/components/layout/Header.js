@@ -1,15 +1,16 @@
-import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { clearMessage, logoutUserAsync, selectuser } from "../../features/user/userSlice"
+import { useDispatch, useSelector } from "react-redux"
+
 import Toast from "../common/Toast"
-import { out } from "../../features/auth/authSlice"
 import LoginLinks from "./LoginLinks"
+import { out } from "../../features/auth/authSlice"
+import { clearMessage, logoutUserAsync, selectuser } from "../../features/user/userSlice"
 
 const Header = () => {
 
     const dispatch = useDispatch();
 
-    const { user, message, status } = useSelector(selectuser)
+    const { user, message, status } = useSelector(selectuser);
 
     const handleClick = () => {
         dispatch(logoutUserAsync());

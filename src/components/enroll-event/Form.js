@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
-import { inputClass, labelClass } from "../../constant/index";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { paymentIntentAync, selectrazor } from "../../features/razor/razorSlice";
-import { validateReferCodeAsync } from "../../features/user/userSlice";
+
 import payment from "../../utils/payment";
+import { inputClass, labelClass } from "../../constant/index";
+import { validateReferCodeAsync } from "../../features/user/userSlice";
+import { paymentIntentAync, selectrazor } from "../../features/razor/razorSlice";
 
 const Form = ({ referCode, event, user, validReferCode }) => {
 
@@ -19,7 +20,6 @@ const Form = ({ referCode, event, user, validReferCode }) => {
             numberOfSeat: 1
         }
     });
-
     const watchReferCode = watch("referCode")
 
     const varifyReferCode = () => {
@@ -32,6 +32,18 @@ const Form = ({ referCode, event, user, validReferCode }) => {
         handleOnlinePayment();
     })
 
+    const handleOnlinePayment = async () => {
+        dispatch(paymentIntentAync({ totalAmount: amount }))
+    }
+
+    const getTotalAmount = () => {
+        let amount = event.fees * watch("numberOfSeat");
+        if (watchReferCode && validReferCode) {
+            amount = Math.round(event?.fees * (1 - 10 / 100)) * watch("numberOfSeat")
+        }
+        setAmount(amount)
+    }
+
     useEffect(() => {
         if (data.success) {
             const callback_url = `${process.env.REACT_APP_URL}event/enroll?eventId=${event.id}&totalPrice=${amount}&referCode=${referCode || ""}&numberOfSeat=${watch("numberOfSeat")}`
@@ -40,11 +52,6 @@ const Form = ({ referCode, event, user, validReferCode }) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data.success]);
-
-
-    const handleOnlinePayment = async () => {
-        dispatch(paymentIntentAync({ totalAmount: amount }))
-    }
 
     useEffect(() => {
         reset({ referCode: referCode })
@@ -61,14 +68,6 @@ const Form = ({ referCode, event, user, validReferCode }) => {
         getTotalAmount()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [validReferCode, watch("numberOfSeat")]);
-
-    const getTotalAmount = () => {
-        let amount = event.fees * watch("numberOfSeat");
-        if (watchReferCode && validReferCode) {
-            amount = Math.round(event?.fees * (1 - 10 / 100)) * watch("numberOfSeat")
-        }
-        setAmount(amount)
-    }
 
     return (
         <form onSubmit={onSubmit} className="flex flex-col">

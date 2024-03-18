@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux"
-import { selecteventrnroll } from "../../features/event-enroll/eventEnrollSlice"
+
+import Details from "../event/Details";
 import TimeSection from "./TimeSection";
 import UserDetails from "./UserDetails";
-import Details from "../event/Details";
 import { selectuser } from "../../features/user/userSlice";
+import { selecteventrnroll } from "../../features/event-enroll/eventEnrollSlice"
 
 const Events = ({ selectedFetching, setSelectedFetching }) => {
 

@@ -1,8 +1,9 @@
-import { useForm } from "react-hook-form"
-import { inputClass, labelClass } from "../../constant";
-import { ClipLoader } from "react-spinners";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form"
+import { ClipLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
+
+import { inputClass, labelClass } from "../../constant";
 import { selectuser, updateUserDataAsync } from "../../features/user/userSlice";
 
 const ProfileUpdateForm = ({ isOpen = true, handleIsOpen }) => {

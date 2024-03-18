@@ -1,12 +1,13 @@
 import { useSelector } from "react-redux"
-import { clearMessage, selectuser } from "../features/user/userSlice"
-import { useNavigate } from "react-router-dom"
-import ProfileUpdateForm from "../components/profile/ProfileUpdateForm";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"
+
 import Toast from "../components/common/Toast";
 import AdminOrder from "../components/profile/Orders";
-import { selectcoursernroll } from "../features/course-enroll/courseEnrollSlice";
+import { clearMessage, selectuser } from "../features/user/userSlice"
+import ProfileUpdateForm from "../components/profile/ProfileUpdateForm";
 import { selecteventrnroll } from "../features/event-enroll/eventEnrollSlice";
+import { selectcoursernroll } from "../features/course-enroll/courseEnrollSlice";
 
 const Profile = () => {
 
@@ -83,9 +84,7 @@ const Profile = () => {
                 </div>
             )
             }
-
             <AdminOrder />
-
         </div >
     )
 }

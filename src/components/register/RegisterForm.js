@@ -1,10 +1,11 @@
-import { useForm } from "react-hook-form"
-import { useDispatch, useSelector } from "react-redux"
-import { generateOTPAync, selectauth } from "../../features/auth/authSlice"
 import { useEffect } from "react"
-import { ClipLoader } from "react-spinners"
 import { Link } from "react-router-dom"
+import { useForm } from "react-hook-form"
+import { ClipLoader } from "react-spinners"
+import { useDispatch, useSelector } from "react-redux"
+
 import { inputClass, labelClass, scrollToTop } from "../../constant"
+import { generateOTPAync, selectauth } from "../../features/auth/authSlice"
 
 const RegisterForm = () => {
 

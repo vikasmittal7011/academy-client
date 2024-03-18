@@ -1,36 +1,31 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { clearMessage, fetchCourseByIdAync, selectcourse } from "../features/course/courseSlice";
-import SimpleLoading from "../components/common/SimpleLoading";
-import { selectuser } from "../features/user/userSlice";
-import DeleteNotic from "../components/course/DeleteNotic";
+
 import Toast from "../components/common/Toast";
 import Details from "../components/course/Details";
+import { selectuser } from "../features/user/userSlice";
+import DeleteNotic from "../components/course/DeleteNotic";
+import SimpleLoading from "../components/common/SimpleLoading";
+import { clearMessage, fetchCourseByIdAync, selectcourse } from "../features/course/courseSlice";
 
 const CourseDetail = () => {
 
     const navigate = useNavigate();
 
-    const [urlCopy, setUrlCopy] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleIsOpen = () => {
-        setIsOpen(!isOpen)
-    }
-
-    const { user } = useSelector(selectuser)
-
-    const { status, course, deteleCourse, message } = useSelector(selectcourse)
-
     const dispatch = useDispatch();
 
     const { id } = useParams();
 
-    useEffect(() => {
-        dispatch(fetchCourseByIdAync(id))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id]);
+    const [urlCopy, setUrlCopy] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const { user } = useSelector(selectuser)
+    const { status, course, deteleCourse, message } = useSelector(selectcourse)
+
+    const handleIsOpen = () => {
+        setIsOpen(!isOpen)
+    }
 
     const handleRefer = async () => {
         const url = `http://localhost:3000/course/register/${course.id}/${user.referCode}`;
@@ -40,6 +35,11 @@ const CourseDetail = () => {
             setUrlCopy(false)
         }, 2000);
     }
+
+    useEffect(() => {
+        dispatch(fetchCourseByIdAync(id))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id]);
 
     useEffect(() => {
         if (deteleCourse) {

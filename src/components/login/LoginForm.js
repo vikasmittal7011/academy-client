@@ -1,10 +1,10 @@
-import { inputClass, labelClass, scrollToTop } from "../../constant/index";
 import { ClipLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { loginUserAync } from "../../features/auth/authSlice";
 
+import { loginUserAync } from "../../features/auth/authSlice";
+import { inputClass, labelClass, scrollToTop } from "../../constant/index";
 
 const LoginForm = ({ handleForgetPasswordState, status }) => {
 

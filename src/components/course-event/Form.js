@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
-import { inputClass, labelClass } from "../../constant/index";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { paymentIntentAync, selectrazor } from "../../features/razor/razorSlice";
-import { validateReferCodeAsync } from "../../features/user/userSlice";
+
 import payment from "../../utils/payment";
+import { inputClass, labelClass } from "../../constant/index";
+import { validateReferCodeAsync } from "../../features/user/userSlice";
+import { paymentIntentAync, selectrazor } from "../../features/razor/razorSlice";
 
 const Form = ({ referCode, course, user, validReferCode }) => {
 
@@ -15,7 +16,6 @@ const Form = ({ referCode, course, user, validReferCode }) => {
     const dispatch = useDispatch();
 
     const { register, watch, reset, handleSubmit } = useForm();
-
     const watchReferCode = watch("referCode")
 
     const varifyReferCode = () => {
@@ -28,6 +28,18 @@ const Form = ({ referCode, course, user, validReferCode }) => {
         handleOnlinePayment();
     })
 
+    const getTotalAmount = () => {
+        let amount = course.fees;
+        if (watchReferCode && validReferCode) {
+            amount = Math.round(course?.fees * (1 - 10 / 100))
+        }
+        setAmount(amount)
+    }
+
+    const handleOnlinePayment = async () => {
+        dispatch(paymentIntentAync({ totalAmount: amount }))
+    }
+
     useEffect(() => {
         if (data.success) {
             const callback_url = `${process.env.REACT_APP_URL}course/enroll?courseId=${course.id}&totalPrice=${amount}&referCode=${referCode || ""}`
@@ -36,11 +48,6 @@ const Form = ({ referCode, course, user, validReferCode }) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data.success]);
-
-
-    const handleOnlinePayment = async () => {
-        dispatch(paymentIntentAync({ totalAmount: amount }))
-    }
 
     useEffect(() => {
         reset({ referCode: referCode })
@@ -58,13 +65,6 @@ const Form = ({ referCode, course, user, validReferCode }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [validReferCode]);
 
-    const getTotalAmount = () => {
-        let amount = course.fees;
-        if (watchReferCode && validReferCode) {
-            amount = Math.round(course?.fees * (1 - 10 / 100))
-        }
-        setAmount(amount)
-    }
 
     return (
         <form onSubmit={onSubmit} className="flex flex-col">

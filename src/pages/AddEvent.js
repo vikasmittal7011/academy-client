@@ -1,14 +1,14 @@
-import { FormProvider, useForm } from "react-hook-form"
-import { ClipLoader } from "react-spinners";
-import Details from "../components/event-form/Details";
-import { useDispatch, useSelector } from "react-redux";
-import { clearMessage, createEventAync, selectevent } from "../features/event/eventSlice";
-import Toast from "../components/common/Toast";
 import { useEffect } from "react";
+import { ClipLoader } from "react-spinners";
+import { FormProvider, useForm } from "react-hook-form"
+import { useDispatch, useSelector } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
+import Toast from "../components/common/Toast";
+import Details from "../components/event-form/Details";
+import { clearMessage, createEventAync, selectevent } from "../features/event/eventSlice";
 
 const AddEvent = () => {
-
 
     const navigate = useNavigate();
 

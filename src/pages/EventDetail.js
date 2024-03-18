@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom"
-import SimpleLoading from "../components/common/SimpleLoading";
-import { selectuser } from "../features/user/userSlice";
+
 import Toast from "../components/common/Toast";
-import { clearMessage, fetchEventByIdAync, selectevent } from "../features/event/eventSlice";
-import DeleteNotic from "../components/event/DeleteNotic";
 import Details from "../components/event/Details";
+import { selectuser } from "../features/user/userSlice";
+import DeleteNotic from "../components/event/DeleteNotic";
+import SimpleLoading from "../components/common/SimpleLoading";
+import { clearMessage, fetchEventByIdAync, selectevent } from "../features/event/eventSlice";
 
 const EventDetail = () => {
 

@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form"
-import { inputClass, labelClass } from "../../constant"
+
 import Heading from "../common/Heading";
+import { inputClass, labelClass } from "../../constant"
 
 const Detail = () => {
 

@@ -1,22 +1,22 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
-import { selectcourse, fetchCourseByIdAync } from "../features/course/courseSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import Toast from "../components/common/Toast";
-import { clearMessage, selectuser } from "../features/user/userSlice";
-import SimpleLoading from "../components/common/SimpleLoading";
 import Form from "../components/course-event/Form";
 import Details from "../components/course/Details";
+import SimpleLoading from "../components/common/SimpleLoading";
+import { clearMessage, selectuser } from "../features/user/userSlice";
+import { selectcourse, fetchCourseByIdAync } from "../features/course/courseSlice";
 
 const CourseEnroll = () => {
-
-    const { validReferCode, message, user } = useSelector(selectuser)
-
-    const { course, status } = useSelector(selectcourse)
 
     const dispatch = useDispatch();
 
     const { id, referCode } = useParams();
+
+    const { validReferCode, message, user } = useSelector(selectuser)
+    const { course, status } = useSelector(selectcourse)
 
     useEffect(() => {
         dispatch(fetchCourseByIdAync(id))

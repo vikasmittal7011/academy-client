@@ -1,18 +1,17 @@
-import { useDispatch, useSelector } from "react-redux"
-import { fetchAlleventEnrollsAync, selecteventrnroll } from "../../features/event-enroll/eventEnrollSlice"
-import SimpletLoading from "../common/SimpleLoading";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
+
 import Events from "../orders/Events";
 import Course from "../orders/Course";
+import SimpletLoading from "../common/SimpleLoading";
 import { fetchAllCourseEnrollsAync } from "../../features/course-enroll/courseEnrollSlice";
+import { fetchAlleventEnrollsAync, selecteventrnroll } from "../../features/event-enroll/eventEnrollSlice"
 
 const AdminOrder = () => {
 
     const [selectedFetching, setSelectedFetching] = useState("all");
 
-
     const [courseSelectedFetching, setCourseSelectedFetching] = useState("all");
-
 
     const { status } = useSelector(selecteventrnroll);
 

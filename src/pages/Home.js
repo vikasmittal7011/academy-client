@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { fetchAllCoursesAync, selectcourse } from "../features/course/courseSlice";
-import { fetchAllEventsAync, selectevent } from "../features/event/eventSlice";
-import SimpleLoading from "../components/common/SimpleLoading";
-import Courses from "../components/home/Courses";
+
 import Events from "../components/home/Events";
+import Courses from "../components/home/Courses";
+import SimpleLoading from "../components/common/SimpleLoading";
+import { fetchAllEventsAync, selectevent } from "../features/event/eventSlice";
+import { fetchAllCoursesAync, selectcourse } from "../features/course/courseSlice";
 
 const Home = () => {
 

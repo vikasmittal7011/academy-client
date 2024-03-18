@@ -1,8 +1,9 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { inputClass, labelClass } from '../../constant';
 import { ClipLoader } from 'react-spinners';
+
+import { inputClass, labelClass } from '../../constant';
 import { passwrodRequestAync } from '../../features/auth/authSlice';
 
 const ForgetPasswordForm = ({ handleForgetPasswordState, status }) => {

@@ -1,14 +1,15 @@
 import { useForm } from "react-hook-form";
-import { inputClass, labelClass } from "../../constant"
 import { ClipLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
+
+import { inputClass, labelClass } from "../../constant"
 import { passwrodResetAync } from "../../features/auth/authSlice";
 
 const ResetPasswordForm = ({ status }) => {
 
     const query = new URLSearchParams(window.location.search);
     const token = query.get("token");
-    
+
     const dispatch = useDispatch()
 
     const {
