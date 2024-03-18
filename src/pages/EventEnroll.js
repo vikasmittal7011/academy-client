@@ -25,21 +25,28 @@ const EventEnroll = () => {
 
     return (
         <div>
+            <Toast message={message} type={validReferCode ? "success" : "err"} clearMessage={clearMessage} />
             {status === "loading" ?
                 <SimpleLoading />
                 :
                 <>
-                    <Toast message={message} type={validReferCode ? "success" : "err"} clearMessage={clearMessage} />
-                    <h1 className="mb-5 text-3xl font-bold">Book Your seat fro Event</h1>
-                    <div className="border border-slate-400 rounded-md p-4">
+                    {event.name ?
+                        <>
+                            <h1 className="mb-5 text-3xl font-bold">Book Your seat fro Event</h1>
+                            <div className="border border-slate-400 rounded-md p-4">
 
-                        <div className="grid md:grid-cols-[2fr_1fr] gap-3">
-                            <Details event={event} />
+                                <div className="grid md:grid-cols-[2fr_1fr] gap-3">
+                                    <Details event={event} />
 
-                            <Form referCode={referCode} event={event} user={user} validReferCode={validReferCode} />
+                                    <Form referCode={referCode} event={event} user={user} validReferCode={validReferCode} />
 
+                                </div>
+                            </div>
+                        </> :
+                        <div className="font-bold flex justify-center mt-10 text-2xl text-red-500">
+                            Event Not Found
                         </div>
-                    </div>
+                    }
                 </>
             }
         </div>

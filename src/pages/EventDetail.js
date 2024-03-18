@@ -58,7 +58,7 @@ const EventDetail = () => {
                 <SimpleLoading />
                 :
                 <>
-                    {event && <>
+                    {event.name ? <>
                         <div className="border border-slate-400 rounded-md p-4">
                             <div className="grid md:grid-cols-[2fr_1fr] gap-3">
                                 <Details event={event} />
@@ -94,7 +94,11 @@ const EventDetail = () => {
                             <h1 className="font-bold text-3xl tracking-wide my-5">About Event</h1>
                             <p className="text-gray-700">{event.description}</p>
                         </div>
-                    </>}
+                    </> :
+                        <div className="font-bold flex justify-center mt-10 text-2xl text-red-500">
+                            Event Not Found
+                        </div>
+                    }
                 </>
             }
         </>

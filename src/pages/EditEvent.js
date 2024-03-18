@@ -46,7 +46,7 @@ const EditEvent = () => {
         <FormProvider {...formMethod}>
             <Toast message={message} type={status !== "failed" ? "success" : "err"} clearMessage={clearMessage} />
 
-            <form className="flex flex-col gap-5 w-full" onSubmit={onSubmit}>
+            {event.name ? <form className="flex flex-col gap-5 w-full" onSubmit={onSubmit}>
 
                 <Details />
 
@@ -56,7 +56,11 @@ const EditEvent = () => {
                         <div>Save</div>
                     </button>
                 </div>
-            </form>
+            </form> :
+                <div className="font-bold flex justify-center mt-10 text-2xl text-red-500">
+                    Event Not Found
+                </div>
+            }
         </FormProvider>
     )
 }

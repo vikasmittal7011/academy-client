@@ -57,21 +57,26 @@ const EditCourse = () => {
         <FormProvider {...formMethod}>
             <Toast message={message} type={status !== "failed" ? "success" : "err"} clearMessage={clearMessage} />
 
-            <form className="flex flex-col gap-5 w-full" onSubmit={onSubmit}>
+            {course.name ?
+                <form className="flex flex-col gap-5 w-full" onSubmit={onSubmit}>
 
-                <Detail />
+                    <Detail />
 
-                <Options />
+                    <Options />
 
-                <Images images={photos} setImages={setPhotos} error={error} setError={setError} />
+                    <Images images={photos} setImages={setPhotos} error={error} setError={setError} />
 
-                <div className="flex flex-col md:flex-row justify-end md:items-center gap-5">
-                    <button type="submit" className={`bg-blue-700 outline-none text-white p-2 px-4 rounded-md font-bold text-xl hover:bg-blue-500 transition-all ${status === "loading" ? "cursor-not-allowed" : "cursor-pointer"} flex justify-center items-center gap-2`}>
-                        <ClipLoader size={20} color="white" loading={status === "loading"} />
-                        <div>Save</div>
-                    </button>
+                    <div className="flex flex-col md:flex-row justify-end md:items-center gap-5">
+                        <button type="submit" className={`bg-blue-700 outline-none text-white p-2 px-4 rounded-md font-bold text-xl hover:bg-blue-500 transition-all ${status === "loading" ? "cursor-not-allowed" : "cursor-pointer"} flex justify-center items-center gap-2`}>
+                            <ClipLoader size={20} color="white" loading={status === "loading"} />
+                            <div>Save</div>
+                        </button>
+                    </div>
+                </form> :
+                <div className="font-bold flex justify-center mt-10 text-2xl text-red-500">
+                    Course Not Found
                 </div>
-            </form>
+            }
         </FormProvider>
     )
 }
