@@ -33,7 +33,7 @@ const CourseDetail = () => {
     }, [id]);
 
     const handleRefer = async () => {
-        const url = `http://localhost:3000/register/course/${user.referCode}`;
+        const url = `http://localhost:3000/course/register/${course.id}/${user.referCode}`;
         await navigator.clipboard.writeText(url)
         setUrlCopy(true)
         setTimeout(() => {

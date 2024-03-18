@@ -11,6 +11,8 @@ const Events = ({ selectedFetching, setSelectedFetching }) => {
 
     const { eventEnrolls } = useSelector(selecteventrnroll)
 
+    console.log(eventEnrolls)
+
     return (
         <>
             <TimeSection heading="Events" setSelectedFetching={setSelectedFetching} selectedFetching={selectedFetching} />
@@ -29,16 +31,23 @@ const Events = ({ selectedFetching, setSelectedFetching }) => {
                             </div>
                         ))}
 
-                        {user.role === "user" && eventEnrolls?.filter((e) => e.user.id === user.id)?.map((e, i) => (
-                            <div key={i} className="border border-slate-400 rounded-md p-4 my-5">
-                                <div className="grid md:grid-cols-[2fr_1fr] gap-3">
-                                    <Details event={e.eventId} />
+                        {user.role === "user" &&
+                            <>
+                                {eventEnrolls?.filter((e) => e.user.id === user.id).length > 0 ? eventEnrolls?.filter((e) => e.user.id === user.id)?.map((e, i) => (
+                                    <div key={i} className="border border-slate-400 rounded-md p-4 my-5">
+                                        <div className="grid md:grid-cols-[2fr_1fr] gap-3">
+                                            <Details event={e.eventId} />
 
-                                    <UserDetails e={e} />
+                                            <UserDetails e={e} />
 
-                                </div>
-                            </div>
-                        ))}
+                                        </div>
+                                    </div>)) :
+                                    <div className="font-bold flex justify-center mt-10 text-2xl text-red-500">
+                                        You Don't Booked Any Events Now.
+                                    </div>
+                                }
+                            </>
+                        }
 
                     </div>
                 </div>

@@ -14,7 +14,11 @@ const Form = ({ referCode, event, user, validReferCode }) => {
 
     const dispatch = useDispatch();
 
-    const { register, formState: { errors }, watch, reset, handleSubmit } = useForm();
+    const { register, formState: { errors }, watch, reset, handleSubmit } = useForm({
+        defaultValues: {
+            numberOfSeat: 1
+        }
+    });
 
     const watchReferCode = watch("referCode")
 
@@ -61,7 +65,7 @@ const Form = ({ referCode, event, user, validReferCode }) => {
     const getTotalAmount = () => {
         let amount = event.fees * watch("numberOfSeat");
         if (watchReferCode && validReferCode) {
-            amount = Math.round(event?.fees * (1 - 10 / 100)) *  watch("numberOfSeat")
+            amount = Math.round(event?.fees * (1 - 10 / 100)) * watch("numberOfSeat")
         }
         setAmount(amount)
     }

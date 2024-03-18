@@ -30,19 +30,28 @@ const Course = ({ selectedFetching, setSelectedFetching }) => {
                             </div>
                         ))}
 
-                        {user.role === "user" && courseEnrolls?.filter((c) => c.user.id === user.id)?.map((c, i) => (
-                            <div key={i} className="border border-slate-400 rounded-md p-4 my-5">
-                                <div className="grid md:grid-cols-[2fr_1fr] gap-3">
-                                    <Details course={c.courseId} />
+                        {user.role === "user" &&
+                            <>
+                                {courseEnrolls?.filter((c) => c.user.id === user.id).length > 0 ? courseEnrolls?.filter((c) => c.user.id === user.id)?.map((c, i) => (
+                                    <div key={i} className="border border-slate-400 rounded-md p-4 my-5">
+                                        <div className="grid md:grid-cols-[2fr_1fr] gap-3">
+                                            <Details course={c.courseId} />
 
-                                    <UserDetails e={c} user={user} />
+                                            <UserDetails e={c} user={user} />
 
-                                </div>
-                            </div>
-                        ))}
+                                        </div>
+                                    </div>
+                                ))
+                                    :
+                                    <div className="font-bold flex justify-center mt-10 text-2xl text-red-500">
+                                        You don't Enroll Any Course
+                                    </div>
+                                }
+                            </>
+                        }
 
                     </div>
-                </div>
+                </div >
                 :
                 <div className="font-bold flex justify-center mt-10 text-2xl text-red-500">
                     Courses Not Found

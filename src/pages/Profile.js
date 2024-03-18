@@ -26,9 +26,9 @@ const Profile = () => {
     const { user, status, message } = useSelector(selectuser);
 
     useEffect(() => {
-        const a = [...courseEnrolls?.filter((e) => e.referCode === e.user.referCode), ...eventEnrolls?.filter((e) => e.referCode === e.user.referCode)]
+        const a = [...courseEnrolls?.filter((e) => e.referCode === user.referCode), ...eventEnrolls?.filter((e) => e.referCode === user.referCode)]
         setTotalPurchase(a.length)
-    }, [courseEnrolls, eventEnrolls]);
+    }, [courseEnrolls, eventEnrolls, user.referCode]);
 
     return (
         <div>
