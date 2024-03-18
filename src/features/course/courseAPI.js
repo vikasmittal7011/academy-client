@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = process.env.REACT_APP_URL;
+const API = process.env.REACT_APP_URL || "/";
 
 export const createCourse = async (course) => {
     return new Promise(async (resolve, reject) => {
