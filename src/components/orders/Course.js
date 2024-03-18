@@ -3,32 +3,37 @@ import TimeSection from "./TimeSection";
 import UserDetails from "./UserDetails";
 import { selectcoursernroll } from "../../features/course-enroll/courseEnrollSlice";
 import { selectuser } from "../../features/user/userSlice";
+import Details from "../course/Details";
 
 const Course = ({ selectedFetching, setSelectedFetching }) => {
 
-    const { user } = useSelector(selectuser)
+    const { user } = useSelector(selectuser);
 
     const { courseEnrolls } = useSelector(selectcoursernroll);
 
     return (
         <>
-            {courseEnrolls?.length > 0 &&
+            <TimeSection heading="Courses" setSelectedFetching={setSelectedFetching} selectedFetching={selectedFetching} user={user} />
+            {courseEnrolls?.length > 0 ?
                 <div>
                     <div className="mx-auto max-w-7xl">
 
-                        <TimeSection heading="Courses" setSelectedFetching={setSelectedFetching} selectedFetching={selectedFetching} user={user} />
 
-                        {courseEnrolls?.map((c, i) => (
+                        {user.role === "admin" && courseEnrolls?.map((c, i) => (
                             <div key={i} className="border border-slate-400 rounded-md p-4 my-5">
                                 <div className="grid md:grid-cols-[2fr_1fr] gap-3">
-                                    <div className="flex flex-col gap-3">
-                                        <h1 className="font-bold text-2xl md:text-3xl tracking-wide">{c.courseId.name}</h1>
-                                        <p>Course Type: {c.courseId.programmeType}</p>
-                                        <p>Learning Mode : {c.courseId.mode}</p>
-                                        <p>Learning Eligibility : {c.courseId.eligibility}</p>
-                                        <p>Duaration : {Math.round(c.courseId.duration / 12)} Year, {c.courseId.duration % 12} Months</p>
-                                        <p>Fees : {c.courseId.fees}</p>
-                                    </div>
+                                    <Details course={c.courseId} />
+
+                                    <UserDetails e={c} user={user} />
+
+                                </div>
+                            </div>
+                        ))}
+
+                        {user.role === "user" && courseEnrolls?.filter((c) => c.user.id === user.id)?.map((c, i) => (
+                            <div key={i} className="border border-slate-400 rounded-md p-4 my-5">
+                                <div className="grid md:grid-cols-[2fr_1fr] gap-3">
+                                    <Details course={c.courseId} />
 
                                     <UserDetails e={c} user={user} />
 
@@ -37,6 +42,10 @@ const Course = ({ selectedFetching, setSelectedFetching }) => {
                         ))}
 
                     </div>
+                </div>
+                :
+                <div className="font-bold flex justify-center mt-10 text-2xl text-red-500">
+                    Courses Not Found
                 </div>
             }
         </>

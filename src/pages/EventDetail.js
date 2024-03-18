@@ -5,8 +5,8 @@ import SimpleLoading from "../components/common/SimpleLoading";
 import { selectuser } from "../features/user/userSlice";
 import Toast from "../components/common/Toast";
 import { clearMessage, fetchEventByIdAync, selectevent } from "../features/event/eventSlice";
-import moment from "moment";
 import DeleteNotic from "../components/event/DeleteNotic";
+import Details from "../components/event/Details";
 
 const EventDetail = () => {
 
@@ -61,14 +61,7 @@ const EventDetail = () => {
                     {event && <>
                         <div className="border border-slate-400 rounded-md p-4">
                             <div className="grid md:grid-cols-[2fr_1fr] gap-3">
-                                <div className="flex flex-col gap-3">
-                                    <h1 className="font-bold text-2xl md:text-3xl tracking-wide">{event.name}</h1>
-                                    <p>Venue : {event?.location?.address}, {event?.location?.state}, {event?.location?.country}, {event?.location?.zipCode}</p>
-                                    <a className="underline" href={event?.location?.mapLocation} rel="noreferrer" target="_blank">Map Location</a>
-                                    <p>Start Date : {moment(event.startDate).format('MMMM Do YYYY, h:mm a')}</p>
-                                    <p>End Date : {moment(event.endDate).format('MMMM Do YYYY, h:mm a')}</p>
-                                    <p>Fees : ₹ {event.fees} /-</p>
-                                </div>
+                                <Details event={event} />
                             </div>
 
                             <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-5">

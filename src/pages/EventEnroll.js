@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import { fetchEventByIdAync, selectevent } from "../features/event/eventSlice";
-import moment from "moment";
 import Toast from "../components/common/Toast";
 import { clearMessage, selectuser } from "../features/user/userSlice";
 import Form from "../components/enroll-event/Form";
 import SimpleLoading from "../components/common/SimpleLoading";
+import Details from "../components/event/Details";
 
 const EventEnroll = () => {
 
@@ -34,14 +34,7 @@ const EventEnroll = () => {
                     <div className="border border-slate-400 rounded-md p-4">
 
                         <div className="grid md:grid-cols-[2fr_1fr] gap-3">
-                            <div className="flex flex-col gap-3">
-                                <h1 className="font-bold text-2xl md:text-3xl tracking-wide">{event.name}</h1>
-                                <p>Venue : {event?.location?.address}, {event?.location?.state}, {event?.location?.country}, {event?.location?.zipCode}</p>
-                                <a className="underline" href={event?.location?.mapLocation} rel="noreferrer" target="_blank">Map Location</a>
-                                <p>Start Date : {moment(event.startDate).format('MMMM Do YYYY, h:mm a')}</p>
-                                <p>End Date : {moment(event.endDate).format('MMMM Do YYYY, h:mm a')}</p>
-                                <p>Fees : ₹ {event.fees} /-</p>
-                            </div>
+                            <Details event={event} />
 
                             <Form referCode={referCode} event={event} user={user} validReferCode={validReferCode} />
 
